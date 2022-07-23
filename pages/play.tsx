@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button, Select } from "../components";
+import { Button, Select, TextArea, Timer } from "../components";
 import RandomSentence from "random-sentence";
 
 interface PageProps {
@@ -9,6 +9,8 @@ interface PageProps {
 const Play = ({ randSentence }: PageProps) => {
   const [randomSentence, setRandomSentence] = useState("");
   const [duration, setDuration] = useState(0);
+  const [isStarted, setIsStarted] = useState(false);
+  const [answer, setAnswer] = useState("");
 
   useEffect(() => {
     setRandomSentence(randSentence);
@@ -21,6 +23,14 @@ const Play = ({ randSentence }: PageProps) => {
   const selectDuration = (e: any) => {
     setDuration(e.target.value);
   };
+
+  const startTest = () => {
+    setIsStarted(true);
+  }
+
+  const handleAnswerChange = (e: any) => {
+    setAnswer(e.target.value);
+  }
 
   return (
     <>
@@ -38,10 +48,11 @@ const Play = ({ randSentence }: PageProps) => {
           { value: 1, text: "1 min" },
           { value: 2, text: "2 mins" },
           { value: 5, text: "5 mins" },
-          { value: "Custom" },
+          { value: "Custom", text: "Custom" },
         ]}
       />
       <Button content="Start Test" onClick={() => console.log(duration)}/>
+      <TextArea id="answer" value={answer} placeholder="Type here..." onChange={handleAnswerChange}/>
       
     </>
   );
