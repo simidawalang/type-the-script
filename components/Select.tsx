@@ -1,17 +1,19 @@
+import { ChangeEventHandler } from "react";
+
 interface SelectProps {
   id: string;
   label?: string;
-  value: string | number;
-  onChange: MouseEvent;
+  value: string | number | undefined;
+  onChange: ChangeEventHandler;
   options: any[];
 }
-const Select = ({ id, label, options, value }: SelectProps) => {
+const Select = ({ id, label, options, value, onChange }: SelectProps) => {
   return (
     <>
       <label htmlFor={id}>{label}</label>
-      <select name={id} id={id} value={value}>
+      <select name={id} id={id} value={value} onChange={onChange}>
         {options &&
-          options.map(({ value }) => <option key={value}>{value}</option>)}
+          options.map(({ text, value }) => <option key={value}>{text}</option>)}
       </select>
     </>
   );
