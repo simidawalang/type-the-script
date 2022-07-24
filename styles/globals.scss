@@ -2,7 +2,11 @@
 @import "./utils.scss";
 @import "./layout.scss";
 
-@import "./Home.scss";
+@import "./home.scss";
+@import "./challenge.scss";
+
+@import "../components/Button/button.scss";
+@import "../components/Select/select.scss";
 
 * {
   padding: 0;

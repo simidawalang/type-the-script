@@ -15,25 +15,28 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className="home-header">
-        <div className="intro container bg-brand text-brand-2">
-          <h1 className="app-name">
+      <header className="header home-header">
+        <div className="intro container">
+          <h1 className="header-text">
             <span>Type</span>
             <span className="text-sm">the</span>
             <span>Script</span>
           </h1>
         </div>
-        <div className="intro container bg-gray app-description">
-          <div>
+        <div className="intro container bg-gray">
+          <div className="app-description">
             <h2 className="welcome-text">Hi there...</h2>
             <p>
               Need a simple app to improve your typing skills? Type the Script
-              is perfect for you. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Rem enim adipisci, provident iusto cumque natus
-              quisquam nisi? Corrupti maiores repudiandae consectetur enim
-              recusandae cum atque delectus fugiat, dolore magni voluptatum?
+              is perfect for you.
             </p>
-            <a className="btn btn-brand get-started-link" href="/play">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem enim
+              adipisci, provident iusto cumque natus quisquam nisi? Corrupti
+              maiores repudiandae consectetur enim recusandae cum atque delectus
+              fugiat, dolore magni voluptatum?
+            </p>
+            <a className="btn btn-brand" href="/challenge">
               Get started
             </a>
           </div>

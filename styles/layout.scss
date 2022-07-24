@@ -1,3 +1,48 @@
+.header {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  @media #{ $largeup } {
+    flex-direction: row;
+  }
+
+  & .intro {
+    height: 50%;
+
+    &:first-child {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $brand;
+      color: $brand2;
+    }
+    &:nth-child(2) {
+      @media #{ $largeup} {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    @media #{ $largeup } {
+      width: 50%;
+      height: 100%;
+    }
+  }
+}
+
+.header-text {
+  font-size: 5rem;
+  text-align: center;
+  & .text-sm {
+    margin-top: 20px;
+    font-size: 1rem;
+  }
+  & span {
+    display: block;
+  }
+}
+
 .container {
-    padding: 1rem 3rem;
+  padding: 1rem 3rem;
 }

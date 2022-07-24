@@ -1,0 +1,28 @@
+.btn {
+    border: 0;
+    border-radius: $border-r-sm;
+    padding: 1rem 1.5rem;
+    display: inline-block;
+} 
+
+.btn-brand {
+    background-color: $brand;
+    color: $white;
+    border: 2px solid $brand;
+    &:hover {
+        background: $gray;
+        color: $brand;
+        cursor: pointer;
+    }
+}
+
+.btn-gray {
+    background-color: $gray;
+    color: $brand;
+    border: 2px solid $gray;
+    &:hover {
+        background: $brand;
+        color: $gray;
+        cursor: pointer;
+    }
+}

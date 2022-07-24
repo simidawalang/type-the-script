@@ -23,14 +23,23 @@ $largeup: "only screen and (min-width: 992px)";
 }
 
 // Font Colours
+.text-white {
+    color: $white;
+}
 .text-brand {
     color: $brand;
 }
 .text-brand-2 {
     color: $brand2;
 }
+
+// Font Sizes
 .text-sm {
     font-size: 0.5rem;
+}
+
+.text-lg {
+    font-size: 1.5rem;
 }
 
 // Components
@@ -48,6 +57,17 @@ $largeup: "only screen and (min-width: 992px)";
     &:hover {
         background: $gray;
         color: $brand;
+        cursor: pointer;
+    }
+}
+
+.btn-gray {
+    background-color: $gray;
+    color: $brand;
+    border: 2px solid $gray;
+    &:hover {
+        background: $brand;
+        color: $gray;
         cursor: pointer;
     }
 }

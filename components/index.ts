@@ -1,6 +1,6 @@
-import Button from "./Button";
+import Button from "./Button/index";
 import Input from "./Input";
-import Select from "./Select";
+import Select from "./Select/index";
 import TextArea from "./TextArea";
 import Timer from "./Timer";
 
