@@ -41,6 +41,8 @@ const Play = () => {
   const startTest = (e: any) => {
     e.preventDefault();
     e.stopPropagation();
+
+    setShowResult(false);
     if (!!duration) setIsStarted(true);
     setAnswer("");
     setScore(0);
@@ -51,7 +53,6 @@ const Play = () => {
     e.stopPropagation();
 
     setIsStarted(false);
-    stopTimer();
     setShowResult(false);
     setAnswer("");
     setScore(0);
@@ -59,10 +60,6 @@ const Play = () => {
 
   const handleAnswerChange = (e: any) => {
     setAnswer(e.target.value);
-  };
-
-  const stopTimer = () => {
-    clearInterval(interval);
   };
 
   const tryAgain = async (e: any) => {
@@ -76,7 +73,6 @@ const Play = () => {
     e.stopPropagation();
 
     try {
-      stopTimer();
       setIsStarted(false);
 
       const randSentWords = randomSentence.split(" ");
@@ -88,7 +84,7 @@ const Play = () => {
           setScore((prev) => prev + 1);
         }
       }
-     
+     setDuration(0)
       setShowResult(true);
       console.log("Submitted");
     } catch (e: any) {
@@ -101,6 +97,8 @@ const Play = () => {
       interval = setInterval(() => {
         setRemainingTime((prev) => prev - 1);
       }, 1000);
+    } else {
+      clearInterval(interval)
     }
 
     return () => clearInterval(interval);

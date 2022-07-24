@@ -9,4 +9,14 @@
     margin-bottom: 1rem;
   }
 
+  & .challenge-link {
+    text-align: center;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    @media #{ $mediumup } {
+      width: fit-content;
+    }
+  }
+
 }

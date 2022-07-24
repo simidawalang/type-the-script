@@ -32,7 +32,10 @@
 }
 
 .header-text {
-  font-size: 5rem;
+  font-size: 3rem;
+  @media #{ $mediumup } {
+    font-size: 5rem;
+  }
   text-align: center;
   & .text-sm {
     margin-top: 20px;
@@ -44,5 +47,8 @@
 }
 
 .container {
-  padding: 6rem 4rem;
+  padding: 3rem 2rem;
+  @media #{ $mediumup } {
+    padding: 6rem 4rem;
+  }
 }

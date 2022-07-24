@@ -30,14 +30,9 @@ const Home: NextPage = () => {
               Need a simple app to improve your typing skills? Type the Script
               is perfect for you.
             </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem enim
-              adipisci, provident iusto cumque natus quisquam nisi? Corrupti
-              maiores repudiandae consectetur enim recusandae cum atque delectus
-              fugiat, dolore magni voluptatum?
-            </p>
+            <p>Measure both your speed and accuracy.</p>
             <Link href="/challenge">
-              <a className="btn btn-brand">Get Started</a>
+              <a className="btn btn-brand challenge-link mt-5">Get Started</a>
             </Link>
           </div>
         </div>
