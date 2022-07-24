@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Button, Select, TextArea, Timer } from "../components";
 
@@ -21,9 +22,14 @@ const Play = () => {
     setRandomSentence(sentences[randomIndex].text);
   };
 
-  const generateSentence = async (e?: any) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const generateSentence = async (e: any) => {
+    // preventDefault and stopPropagation only exist on forms, so
+    // they are conditionally called if the event is being dispatched on a form.
+    e?.preventDefault();
+    e?.stopPropagation();
+
+    setIsStarted(false);
+    setShowResult(false);
     fetchSentence();
   };
 
@@ -36,6 +42,7 @@ const Play = () => {
     e.preventDefault();
     e.stopPropagation();
     if (!!duration) setIsStarted(true);
+    setAnswer("");
     setScore(0);
   };
 
@@ -44,6 +51,9 @@ const Play = () => {
     e.stopPropagation();
 
     setIsStarted(false);
+    stopTimer();
+    setShowResult(false);
+    setAnswer("");
     setScore(0);
   };
 
@@ -55,11 +65,18 @@ const Play = () => {
     clearInterval(interval);
   };
 
+  const tryAgain = async (e: any) => {
+    setIsStarted(false);
+    setDuration(0);
+    generateSentence(e);
+  };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     e.stopPropagation();
 
     try {
+      stopTimer();
       setIsStarted(false);
 
       const randSentWords = randomSentence.split(" ");
@@ -71,7 +88,7 @@ const Play = () => {
           setScore((prev) => prev + 1);
         }
       }
-      stopTimer();
+     
       setShowResult(true);
       console.log("Submitted");
     } catch (e: any) {
@@ -92,17 +109,20 @@ const Play = () => {
   useEffect(() => {
     fetchSentence();
   }, []);
-
+console.log(1)
   return (
     <main className="header challenge-page">
       <div className="intro container">
+        <Link href="/">
+          <a className="home-link btn">   {"<<< Go Home"}</a>
+       </Link>
         <form className="challenge-form" onSubmit={handleSubmit}>
           <h2 className="header-text">Challenge</h2>
 
           <p className="text-white text-lg">{randomSentence}</p>
           {!isStarted && (
             <Button
-              className="btn"
+              className="btn mt-3"
               content="Generate another sentence"
               onClick={generateSentence}
             />
@@ -132,7 +152,7 @@ const Play = () => {
                 placeholder="Select the number of minutes"
               />
               <Button
-              className="btn btn-gray"
+                className="btn btn-gray ml-3"
                 content="Start Test"
                 disabled={!!duration}
                 onClick={startTest}
@@ -140,46 +160,54 @@ const Play = () => {
             </div>
           ) : (
             <>
+              <Timer duration={remainingTime} />
               <TextArea
+              className="mt-4 mb-2"
                 id="answer"
                 value={answer}
                 placeholder="Type here..."
+                rows={6}
                 onChange={handleAnswerChange}
               />
-              <Timer duration={remainingTime} />
-              <Button content="Submit" />
-              <Button content="Start over" onClick={startOver} />
+
+              <Button className="btn btn-gray" content="Submit" />
+              <Button
+                className="btn btn-gray ml-3"
+                content="Start over"
+                onClick={startOver}
+              />
             </>
           )}
         </form>
       </div>
       <div className="intro">
-        {showResult && (
-          <div>
-            <p className="text-lg">
-              No of correct words: {score}/{randomSentence.split(" ").length}
-            </p>
-            <p className="text-lg">
-              Typing speed:{" "}
-              {(
-                answer.split(" ").length /
-                (duration * 60 - remainingTime)
-              ).toFixed(2)}{" "}
-              words/sec
-            </p>
-            <Button
-              className="btn btn-brand"
-              content="Try again"
-              onClick={(e: any) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setIsStarted(false);
-                setDuration(0);
-                generateSentence();
-              }}
-            />
-          </div>
-        )}
+        <div>
+          <h3 className="text-xl mb-3">Your results will appear here</h3>
+          {showResult && (
+            <div>
+              <div className="mb-3">
+                <p className="text-lg">
+                  No of correct words: {score}/
+                  {randomSentence.split(" ").length}
+                </p>
+                <p className="text-lg">
+                  Typing speed:{" "}
+                  {(
+                    answer.split(" ").length /
+                    (duration * 60 - remainingTime)
+                  ).toFixed(2)}{" "}
+                  words/sec
+                </p>
+              </div>
+
+              <Button
+                className="btn btn-brand"
+                content="Try again"
+                onClick={tryAgain}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </main>
   );

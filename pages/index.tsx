@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
@@ -36,9 +36,9 @@ const Home: NextPage = () => {
               maiores repudiandae consectetur enim recusandae cum atque delectus
               fugiat, dolore magni voluptatum?
             </p>
-            <a className="btn btn-brand" href="/challenge">
-              Get started
-            </a>
+            <Link href="/challenge">
+              <a className="btn btn-brand">Get Started</a>
+            </Link>
           </div>
         </div>
       </header>

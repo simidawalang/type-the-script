@@ -1,4 +1,15 @@
 .challenge-page {
+    & .intro {
+        &:first-child {
+            align-items: flex-start;
+            position: relative;
+        }
+    }
+    & .home-link {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+    }
     & .header-text {
         margin-bottom: 6rem;
     }

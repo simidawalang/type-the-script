@@ -9,8 +9,8 @@ const Timer = ({duration}: TimerProps) => {
 
     return (<>
     
-    <h3>TIMER</h3>
-        <p>{duration}s</p></>
+    <h3>TIMER: {duration}s</h3>
+    </>
     );
 }
 

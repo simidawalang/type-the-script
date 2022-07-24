@@ -17,10 +17,10 @@ $largeup: "only screen and (min-width: 992px)";
 .bg-brand-2 {
     background: $brand2;
 }
-
 .bg-gray {
     background: $gray;
 }
+
 
 // Font Colours
 .text-white {
@@ -33,41 +33,81 @@ $largeup: "only screen and (min-width: 992px)";
     color: $brand2;
 }
 
+
 // Font Sizes
 .text-sm {
     font-size: 0.5rem;
 }
-
 .text-lg {
     font-size: 1.5rem;
 }
 
-// Components
-.btn {
-    border: 0;
-    border-radius: $border-r-sm;
-    padding: 1rem 1.5rem;
-    display: inline-block;
-} 
-
-.btn-brand {
-    background-color: $brand;
-    color: $white;
-    border: 2px solid $brand;
-    &:hover {
-        background: $gray;
-        color: $brand;
-        cursor: pointer;
-    }
+.text-xl {
+    font-size: 2rem;
 }
 
-.btn-gray {
-    background-color: $gray;
-    color: $brand;
-    border: 2px solid $gray;
-    &:hover {
-        background: $brand;
-        color: $gray;
-        cursor: pointer;
-    }
+
+// Margins
+.mt-1 {
+    margin-top: 0.5rem;
+}
+.mt-2 {
+    margin-top: 1rem;
+}
+.mt-3 {
+    margin-top: 1.5rem;
+}
+.mt-4 {
+    margin-top: 2.0rem;
+}
+.mt-5 {
+    margin-top: 2.5rem;
+}
+
+.mr-1 {
+    margin-right: 0.5rem;
+}
+.mr-2 {
+    margin-right: 1rem;
+}
+.mr-3 {
+    margin-right: 1.5rem;
+}
+.mr-4 {
+    margin-right: 2.0rem;
+}
+.mr-5 {
+    margin-right: 2.5rem;
+}
+
+.mb-1 {
+    margin-bottom: 0.5rem;
+}
+.mb-2 {
+    margin-bottom: 1rem;
+}
+.mb-3 {
+    margin-bottom: 1.5rem;
+}
+.mb-4 {
+    margin-bottom: 2.0rem;
+}
+.mb-5 {
+    margin-bottom: 2.5rem;
+}
+
+.ml-1 {
+    margin-left: 0.5rem;
+}
+.ml-2 {
+    margin-left: 1rem;
+}
+.ml-3 {
+    margin-left: 1.5rem;
+}
+.ml-4 {
+    margin-left: 2.0rem;
+}
+.ml-5 {
+    margin-left: 2.5rem;
 }
