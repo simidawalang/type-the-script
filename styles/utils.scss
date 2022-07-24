@@ -1,0 +1,53 @@
+$brand: #043927; // sacremento green
+$brand2: #c7ea46; // lime
+
+$white: #fff;
+$gray: #eeeeee; // light gray
+$black: #232023;
+
+$border-r-sm: 4px;
+
+$mediumup: "only screen and (min-width: 768px)";
+$largeup: "only screen and (min-width: 992px)";
+
+// Backgrounds
+.bg-brand {
+    background: $brand;
+}
+.bg-brand-2 {
+    background: $brand2;
+}
+
+.bg-gray {
+    background: $gray;
+}
+
+// Font Colours
+.text-brand {
+    color: $brand;
+}
+.text-brand-2 {
+    color: $brand2;
+}
+.text-sm {
+    font-size: 0.5rem;
+}
+
+// Components
+.btn {
+    border: 0;
+    border-radius: $border-r-sm;
+    padding: 1rem 1.5rem;
+    display: inline-block;
+} 
+
+.btn-brand {
+    background-color: $brand;
+    color: $white;
+    border: 2px solid $brand;
+    &:hover {
+        background: $gray;
+        color: $brand;
+        cursor: pointer;
+    }
+}
