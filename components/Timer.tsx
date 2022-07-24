@@ -5,17 +5,12 @@ interface TimerProps {
 }
 
 const Timer = ({duration}: TimerProps) => {
-    useEffect(() => {
-        const interval = setInterval(() => {
-           console.log(duration)
-        }, 1000);
+   
 
-        return () => clearInterval(interval);
-    }, []);
-
-    return (
-
-        <p>{duration}</p>
+    return (<>
+    
+    <h3>TIMER</h3>
+        <p>{duration}s</p></>
     );
 }
 
