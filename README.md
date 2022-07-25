@@ -7,5 +7,5 @@ To check it out locally, run:
 - ```yarn dev``` to run the development server.
 
 
-Live Link: [Type the Script](https://type-the-script-6m27qnt6q-simidawalang.vercel.app/challenge)
+Live Link: [Type the Script](https://type-the-script-6m27qnt6q-simidawalang.vercel.app)
 
