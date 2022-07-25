@@ -5,7 +5,7 @@ import { Button, Input, Select, TextArea, Timer } from "../components";
 const Play = () => {
   const [randomSentence, setRandomSentence] = useState("");
   const [duration, setDuration] = useState<any>(0);
-  const [remainingTime, setRemainingTime] = useState(0);
+  const [remainingTime, setRemainingTime] = useState(0.01);
   const [isStarted, setIsStarted] = useState(false);
   const [answer, setAnswer] = useState("");
   const [showResult, setShowResult] = useState(false);
