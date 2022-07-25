@@ -71,9 +71,9 @@ const Play = () => {
     generateSentence(e);
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleSubmit = async (e?: any) => {
+    e?.preventDefault();
+    e?.stopPropagation();
 
     try {
       setIsStarted(false);
@@ -109,6 +109,17 @@ const Play = () => {
     fetchSentence();
   }, []);
 
+  useEffect(() => {
+    // Automatically submit when time runs out
+    const submitOnTimeout =  async() => {
+      if(remainingTime === 0) {
+        await handleSubmit();
+      }
+    }
+
+    submitOnTimeout();
+  }, [remainingTime]);
+  
   return (
     <main className="header challenge-page">
       <div className="intro container">
@@ -142,15 +153,15 @@ const Play = () => {
                 value={duration}
                 onChange={selectDuration}
                 type="number"
-                min={1}
+                min={0}
                 max={30}
               />
 
               <Button
                 className="btn btn-brand ml-1"
                 content="Start Test"
-                disabled={!!duration}
                 onClick={startTest}
+                disabled={duration === 0}
               />
             </div>
           ) : (

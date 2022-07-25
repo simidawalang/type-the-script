@@ -17,6 +17,15 @@
         color: $brand;
         cursor: pointer;
     }
+    &:disabled {
+        background: $gray;
+        color: $white;
+    }
+    &-outline {
+        background: $gray;
+        color: $brand;
+        border: 2px solid $brand;
+    }
 }
 
 .btn-gray {
