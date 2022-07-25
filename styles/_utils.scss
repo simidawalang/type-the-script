@@ -37,6 +37,9 @@ $largeup: "only screen and (min-width: 992px)";
 // Font Sizes
 .text-sm {
     font-size: 0.5rem;
+    @media #{ $mediumup} {
+        font-size: 0.75rem;
+    }
 }
 .text-lg {
     font-size: 1.5rem;

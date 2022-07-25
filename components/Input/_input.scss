@@ -1,0 +1,9 @@
+.input {
+    display: inline-block;
+    & label {
+        display: block;
+    }
+    & input {
+        width: 100%;
+    }
+}

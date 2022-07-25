@@ -7,9 +7,10 @@ interface TextAreaProps {
   name?: string;
   rows?: number | undefined;
   cols?: number | undefined;
-  onChange: ChangeEventHandler;
+  onChange?: ChangeEventHandler;
   value: string;
   placeholder?: string;
+  readOnly?: boolean;
 }
 
 const TextArea = ({
@@ -21,6 +22,8 @@ const TextArea = ({
   value,
   placeholder,
   onChange,
+  readOnly = false
+
 }: TextAreaProps) => {
   return (
     <div className={`textarea ${className}`}>
@@ -33,6 +36,7 @@ const TextArea = ({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
+        readOnly={readOnly}
       ></textarea>
     </div>
   );

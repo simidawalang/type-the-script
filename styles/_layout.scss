@@ -15,7 +15,6 @@
       justify-content: center;
       align-items: center;
       background: $brand;
-      color: $brand2;
     }
     &:nth-child(2) {
       @media #{ $largeup} {
@@ -37,10 +36,6 @@
     font-size: 5rem;
   }
   text-align: center;
-  & .text-sm {
-    margin-top: 20px;
-    font-size: 1rem;
-  }
   & span {
     display: block;
   }

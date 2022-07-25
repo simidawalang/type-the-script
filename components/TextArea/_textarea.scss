@@ -1,7 +1,8 @@
 .textarea {
     & textarea {
         padding: 0.8rem;
-        border: $border-r-sm;
+        border: 1px solid $gray;
+        border-radius: $border-r-sm;
         width: 100%;
     }
 }

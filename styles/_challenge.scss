@@ -1,20 +1,41 @@
 .challenge-page {
     & .intro {
+        height: fit-content;
         &:first-child {
             align-items: flex-start;
             position: relative;
+
+        background: $gray;
+        }
+        @media #{ $mediumup } {
+            height: 100vh;
         }
     }
     & .home-link {
         position: absolute;
         top: 1rem;
         left: 1rem;
+        color: $brand;
     }
     & .header-text {
-        margin-bottom: 6rem;
+        margin: 2rem 0;
+        color: $brand;
+        @media #{ $mediumup } {
+            margin-bottom: 6rem;
+        }
     }
+    & .challenge-form {
+        width: 100%;
+    }
+    & .random-text {
+        height: 4ch;
+    }
+    & .result-text {
+        text-align: center;
+    }
+
     & .instructions {
         margin: 1rem 0;
-        line-height: 1.5rem;
+        line-height: 1rem;
     }
 }

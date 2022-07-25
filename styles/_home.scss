@@ -1,5 +1,8 @@
 .home-header {
-  .app-description {
+  & .intro:first-child {
+    color: $brand2;
+  }
+  & .app-description {
     line-height: 1.5rem;
     & p {
       margin-bottom: 1rem;

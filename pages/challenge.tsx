@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Button, Select, TextArea, Timer } from "../components";
+import { Button, Input, Select, TextArea, Timer } from "../components";
 
 const Play = () => {
   const [randomSentence, setRandomSentence] = useState("");
-  const [duration, setDuration] = useState(0);
+  const [duration, setDuration] = useState<any>(0);
   const [remainingTime, setRemainingTime] = useState(0);
   const [isStarted, setIsStarted] = useState(false);
   const [answer, setAnswer] = useState("");
@@ -34,6 +34,9 @@ const Play = () => {
   };
 
   const selectDuration = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     setDuration(e.target.value);
     setRemainingTime(+e.target.value * 60);
   };
@@ -84,9 +87,7 @@ const Play = () => {
           setScore((prev) => prev + 1);
         }
       }
-     setDuration(0)
       setShowResult(true);
-      console.log("Submitted");
     } catch (e: any) {
       console.error(e);
     }
@@ -98,7 +99,7 @@ const Play = () => {
         setRemainingTime((prev) => prev - 1);
       }, 1000);
     } else {
-      clearInterval(interval)
+      clearInterval(interval);
     }
 
     return () => clearInterval(interval);
@@ -107,25 +108,25 @@ const Play = () => {
   useEffect(() => {
     fetchSentence();
   }, []);
-console.log(1)
+
   return (
     <main className="header challenge-page">
       <div className="intro container">
         <Link href="/">
-          <a className="home-link btn">   {"<<< Go Home"}</a>
-       </Link>
+          <a className="home-link btn"> {"<<< Go Home"}</a>
+        </Link>
         <form className="challenge-form" onSubmit={handleSubmit}>
           <h2 className="header-text">Challenge</h2>
 
-          <p className="text-white text-lg">{randomSentence}</p>
+          <p className="random-text text-lg">{randomSentence}</p>
           {!isStarted && (
             <Button
-              className="btn mt-3"
+              className="btn btn-brand mt-3"
               content="Generate another sentence"
               onClick={generateSentence}
             />
           )}
-          <ul className="instructions">
+          <ul className="instructions text-sm">
             <li>Your challenge is to type the sentence above.</li>
             <li>
               You get one point for every word you type correctly, punctutation
@@ -135,22 +136,18 @@ console.log(1)
 
           {!isStarted ? (
             <div>
-              <Select
-                id="duration"
+              <Input
                 className="btn"
-                label="How many minutes?"
+                label="How many minutes? (1 - 30 min)"
                 value={duration}
                 onChange={selectDuration}
-                options={[
-                  { value: 1, text: "1 min" },
-                  { value: 2, text: "2 mins" },
-                  { value: 5, text: "5 mins" },
-                  { value: "Custom", text: "Custom" },
-                ]}
-                placeholder="Select the number of minutes"
+                type="number"
+                min={1}
+                max={30}
               />
+
               <Button
-                className="btn btn-gray ml-3"
+                className="btn btn-brand ml-1"
                 content="Start Test"
                 disabled={!!duration}
                 onClick={startTest}
@@ -160,7 +157,7 @@ console.log(1)
             <>
               <Timer duration={remainingTime} />
               <TextArea
-              className="mt-4 mb-2"
+                className="mt-4 mb-2"
                 id="answer"
                 value={answer}
                 placeholder="Type here..."
@@ -179,11 +176,21 @@ console.log(1)
         </form>
       </div>
       <div className="intro">
-        <div>
-          <h3 className="text-xl mb-3">Your results will appear here</h3>
+        <div className="container">
+          <h3 className="text-xl mb-3 result-text">
+            Your results will appear here
+          </h3>
           {showResult && (
             <div>
               <div className="mb-3">
+              <TextArea
+                className="mt-4 mb-2"
+                id="answer"
+                value={answer}
+                placeholder="Type here..."
+                rows={6}
+                readOnly
+              />
                 <p className="text-lg">
                   No of correct words: {score}/
                   {randomSentence.split(" ").length}
