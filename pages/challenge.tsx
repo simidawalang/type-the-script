@@ -88,6 +88,7 @@ const Play = () => {
         }
       }
       setShowResult(true);
+      console.log(3)
     } catch (e: any) {
       console.error(e);
     }
@@ -112,7 +113,7 @@ const Play = () => {
   useEffect(() => {
     // Automatically submit when time runs out
     const submitOnTimeout =  async() => {
-      if(remainingTime === 0) {
+      if(isStarted && remainingTime === 0) {
         await handleSubmit();
       }
     }
