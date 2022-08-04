@@ -5,17 +5,20 @@ import Loader from "../components/Loader";
 
 const Play = () => {
   const [randomSentence, setRandomSentence] = useState("");
+  const [showOptions, setShowOptions] = useState(true);
   const [duration, setDuration] = useState<any>(0);
   const [remainingTime, setRemainingTime] = useState(0.01);
   const [isStarted, setIsStarted] = useState(false);
   const [answer, setAnswer] = useState("");
   const [showResult, setShowResult] = useState(false);
+  const [resultLoading, setResultLoading] = useState(false);
   const [score, setScore] = useState(0);
 
   let interval: any;
 
   const fetchSentence = async () => {
-    setRandomSentence("...")
+    !showOptions && setShowOptions(true);
+    setRandomSentence("...");
     const data = await fetch("/api/sentences");
     const sentences = await data.json();
 
@@ -32,7 +35,9 @@ const Play = () => {
 
     setIsStarted(false);
     setShowResult(false);
-    fetchSentence();
+    setDuration(0);
+
+    await fetchSentence();
   };
 
   const selectDuration = (e: any) => {
@@ -48,6 +53,7 @@ const Play = () => {
     e.stopPropagation();
 
     setShowResult(false);
+    setShowOptions(false);
     if (!!duration) setIsStarted(true);
     setAnswer("");
     setScore(0);
@@ -59,6 +65,7 @@ const Play = () => {
 
     setIsStarted(false);
     setShowResult(false);
+    if (!showOptions) setShowOptions(true);
     setAnswer("");
     setScore(0);
   };
@@ -79,6 +86,7 @@ const Play = () => {
 
     try {
       setIsStarted(false);
+      setResultLoading(true);
 
       const randSentWords = randomSentence.split(" ");
       const answerWords = answer.split(" ");
@@ -89,8 +97,8 @@ const Play = () => {
           setScore((prev) => prev + 1);
         }
       }
+      setResultLoading(false);
       setShowResult(true);
-      console.log(3)
     } catch (e: any) {
       console.error(e);
     }
@@ -114,33 +122,24 @@ const Play = () => {
 
   useEffect(() => {
     // Automatically submit when time runs out
-    const submitOnTimeout =  async() => {
-      if(isStarted && remainingTime === 0) {
+    const submitOnTimeout = async () => {
+      if (isStarted && remainingTime === 0) {
         await handleSubmit();
       }
-    }
+    };
 
     submitOnTimeout();
   }, [remainingTime]);
 
-  
   return (
-    <main className="header challenge-page">
-      <div className="intro container">
+    <main className="container challenge-page">
+      <div className="">
         <Link href="/">
           <a className="home-link btn"> {"<<< Go Home"}</a>
         </Link>
         <form className="challenge-form" onSubmit={handleSubmit}>
-          <h2 className="header-text">Challenge</h2>
+          <p className="random-text text-lg mb-3">{randomSentence}</p>
 
-          <p className="random-text text-lg">{randomSentence}</p>
-          {!isStarted && (
-            <Button
-              className="btn btn-brand mt-3"
-              content="Generate another sentence"
-              onClick={generateSentence}
-            />
-          )}
           <ul className="instructions text-sm">
             <li>Your challenge is to type the sentence above.</li>
             <li>
@@ -148,26 +147,31 @@ const Play = () => {
               included and it is case-sensitive.
             </li>
           </ul>
-
           {!isStarted ? (
-            <div>
-              <Input
-                className="btn"
-                label="How many minutes? (1 - 30 min)"
-                value={duration}
-                onChange={selectDuration}
-                type="number"
-                min={0}
-                max={30}
-              />
-
-              <Button
-                className="btn btn-brand ml-1"
-                content="Start Test"
-                onClick={startTest}
-                disabled={duration === 0}
-              />
-            </div>
+            showOptions && (
+              <>
+                <Button
+                  className="btn btn-brand mt-3 mr-5"
+                  content="Generate another sentence"
+                  onClick={generateSentence}
+                />
+                <Input
+                  className="btn"
+                  label="How many minutes? (1 - 30 min)"
+                  value={duration}
+                  onChange={selectDuration}
+                  type="number"
+                  min={0}
+                  max={30}
+                />
+                <Button
+                  className="btn btn-brand"
+                  content="Start Test"
+                  onClick={startTest}
+                  disabled={duration === 0}
+                />
+              </>
+            )
           ) : (
             <>
               <Timer duration={remainingTime} />
@@ -180,9 +184,9 @@ const Play = () => {
                 onChange={handleAnswerChange}
               />
 
-              <Button className="btn btn-gray" content="Submit" />
+              <Button className="btn btn-brand" content="Submit" />
               <Button
-                className="btn btn-gray ml-3"
+                className="btn btn-brand-outline ml-3"
                 content="Start over"
                 onClick={startOver}
               />
@@ -190,15 +194,12 @@ const Play = () => {
           )}
         </form>
       </div>
-      <div className="intro">
-        <div className="container">
-          <h3 className="text-xl mb-3 result-text">
-            Your results will appear here
-          </h3>
+      <div className="challenge-results">
+        {resultLoading ? (
           <Loader />
-          {showResult && (
-            <div>
-              <div className="mb-3">
+        ) : showResult ? (
+          <div>
+            <div className="mb-3">
               <TextArea
                 className="mt-4 mb-2"
                 id="answer"
@@ -207,28 +208,28 @@ const Play = () => {
                 rows={6}
                 readOnly
               />
-                <p className="text-lg">
-                  No of correct words: {score}/
-                  {randomSentence.split(" ").length}
-                </p>
-                <p className="text-lg">
-                  Typing speed:{" "}
-                  {(
-                    answer.split(" ").length /
-                    (duration * 60 - remainingTime)
-                  ).toFixed(2)}{" "}
-                  words/sec
-                </p>
-              </div>
-
-              <Button
-                className="btn btn-brand"
-                content="Try again"
-                onClick={tryAgain}
-              />
+              <p className="text-lg">
+                No of correct words: {score}/{randomSentence.split(" ").length}
+              </p>
+              <p className="text-lg">
+                Typing speed:{" "}
+                {answer.split(" ")[0] === ""
+                  ? 0 / (duration * 60 - remainingTime)
+                  : (
+                      answer.split(" ").length /
+                      (duration * 60 - remainingTime)
+                    ).toFixed(2)}{" "}
+                words/sec
+              </p>
             </div>
-          )}
-        </div>
+
+            <Button
+              className="btn btn-brand"
+              content="Try again"
+              onClick={tryAgain}
+            />
+          </div>
+        ) : null}
       </div>
     </main>
   );

@@ -1,16 +1,6 @@
 .challenge-page {
-    & .intro {
-        height: fit-content;
-        &:first-child {
-            align-items: flex-start;
-            position: relative;
-
-        background: $gray;
-        }
-        @media #{ $mediumup } {
-            height: 100vh;
-        }
-    }
+    background-color: $gray;
+    height: 100vh;
     & .home-link {
         position: absolute;
         top: 1rem;
@@ -24,11 +14,12 @@
             margin-bottom: 6rem;
         }
     }
-    & .challenge-form {
-        width: 100%;
+    & .challenge-form, .challenge-results {
+        width: 80%;
+        margin: auto;
     }
     & .random-text {
-        height: 4ch;
+        min-height: 4ch;
     }
     & .result-text {
         text-align: center;

@@ -1,6 +1,9 @@
 .home-header {
   & .intro:first-child {
     color: $brand2;
+    & .header-text .text-sm {
+      margin-top: 1rem;
+    }
   }
   & .app-description {
     line-height: 1.5rem;
@@ -8,6 +11,7 @@
       margin-bottom: 1rem;
     }
   }
+
   & .welcome-text {
     margin-bottom: 1rem;
   }

@@ -32,7 +32,7 @@ const Home: NextPage = () => {
             </p>
             <p>Measure both your speed and accuracy.</p>
             <Link href="/challenge">
-              <a className="btn btn-brand challenge-link mt-5">Get Started</a>
+              <a className="btn btn-brand challenge-link">Get Started</a>
             </Link>
           </div>
         </div>

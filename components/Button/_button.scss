@@ -3,6 +3,7 @@
     border-radius: $border-r-sm;
     padding: 0.5rem 1rem;
     display: inline-block;
+    transition: 0.15s linear;
     @media #{ $mediumup } {
         padding: 1rem 1.5rem;
     }
@@ -18,8 +19,10 @@
         cursor: pointer;
     }
     &:disabled {
-        background: $gray;
+        background: $darker-gray;
         color: $white;
+        border: 2px solid $darker-gray;
+        cursor: not-allowed;
     }
     &-outline {
         background: $gray;
