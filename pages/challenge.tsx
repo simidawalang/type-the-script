@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Button, Input, Select, TextArea, Timer } from "../components";
+import Loader from "../components/Loader";
 
 const Play = () => {
   const [randomSentence, setRandomSentence] = useState("");
@@ -14,6 +15,7 @@ const Play = () => {
   let interval: any;
 
   const fetchSentence = async () => {
+    setRandomSentence("...")
     const data = await fetch("/api/sentences");
     const sentences = await data.json();
 
@@ -37,7 +39,7 @@ const Play = () => {
     e.preventDefault();
     e.stopPropagation();
 
-    setDuration(e.target.value);
+    setDuration(+e.target.value);
     setRemainingTime(+e.target.value * 60);
   };
 
@@ -120,6 +122,7 @@ const Play = () => {
 
     submitOnTimeout();
   }, [remainingTime]);
+
   
   return (
     <main className="header challenge-page">
@@ -192,6 +195,7 @@ const Play = () => {
           <h3 className="text-xl mb-3 result-text">
             Your results will appear here
           </h3>
+          <Loader />
           {showResult && (
             <div>
               <div className="mb-3">

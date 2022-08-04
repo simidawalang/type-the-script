@@ -11,7 +11,7 @@ interface ButtonProps {
 const Button = ({ className, type, onClick, content, disabled }: ButtonProps) => {
     const [isDisabled, setIsDisabled] = useState(disabled)
   return (
-    <button className={className} type={type} onClick={onClick}>
+    <button className={className} type={type} onClick={onClick} disabled={disabled}>
       {content}
     </button>
   );
