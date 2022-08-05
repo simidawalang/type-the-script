@@ -3,8 +3,9 @@
     & label {
         display: block;
     }
-    & input {
+    & input, input:focus {
         width: 100%;
+        font-size: 16px;
 
     border: 2px solid $gray;
     }
